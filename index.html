@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Ajoomi - Find trusted local services instantly. Electricians, Plumbers, Cleaners, and more.">
+  <meta name="theme-color" content="#00bcd4">
+
+  <!-- FIX 9: Open Graph meta tags for WhatsApp / Instagram share previews -->
+  <meta property="og:title" content="Ajoomi – Instant Local Services">
+  <meta property="og:description" content="Book electricians, plumbers, cleaners, AC repair & more in 30 minutes. Verified professionals at your doorstep.">
+  <meta property="og:image" content="https://yourdomain.com/og-image.png">
+  <meta property="og:url" content="https://yourdomain.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ajoomi – Instant Local Services">
+  <meta name="twitter:description" content="Book trusted home services in 30 minutes across Chhattisgarh.">
+  <meta name="twitter:image" content="https://yourdomain.com/og-image.png">
+
+  <title>Ajoomi – Instant Local Services</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader" aria-hidden="true">
+  <img src="images/images.png" alt="Ajoomi Logo" class="loader-img" width="64" height="64">
+  <div class="loader-logo">Ajoomi<span>.</span></div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-tagline">Finding trusted services near you...</div>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div id="scrollBar" aria-hidden="true"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container nav-container">
+
+    <a href="#home" class="logo">
+      <!-- FIX 8: Added width/height to prevent layout shift (CLS) -->
+      <img src="images/images.png" alt="Ajoomi Logo" width="36" height="36">
+      <span>Ajoomi</span>
+    </a>
+
+    <ul class="nav-menu" id="nav-menu" role="list">
+      <li><a href="#home"         class="nav-link">Home</a></li>
+      <li><a href="#services"     class="nav-link">Services</a></li>
+      <li><a href="#how-it-works" class="nav-link">How it Works</a></li>
+      <li><a href="#faq"          class="nav-link">FAQ</a></li>
+      <li>
+        <a href="#" class="btn-primary nav-btn"
+           onclick="openAppPopup(); return false;"
+           role="button">Download App</a>
+      </li>
+      <!-- FIX: Dark mode toggle placed inside mobile menu so it's accessible on mobile -->
+      <li class="nav-theme-li">
+        <button id="themeToggleMobile" class="theme-toggle theme-toggle-mobile" aria-label="Toggle dark mode">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
+          <span class="theme-label">Dark Mode</span>
+        </button>
+      </li>
+    </ul>
+
+    <!-- Desktop dark mode toggle (hidden on mobile) -->
+    <button id="themeToggle" class="theme-toggle theme-toggle-desktop" aria-label="Toggle dark mode">
+      <i class="fa-solid fa-moon" aria-hidden="true"></i>
+    </button>
+
+    <button id="hamburger" class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-bg-animation" aria-hidden="true"></div>
+  <div class="container hero-content">
+
+    <div class="hero-text fade-in">
+      <h1>Find Trusted Local Services <span class="gradient-text">Instantly</span></h1>
+      <p>From AC repair to home cleaning, Ajoomi connects you with verified professionals in your neighborhood. Book in seconds, pay securely.</p>
+      <div class="city-selector fade-in">
+        <div class="city-steps">
+          <div class="city-step-item">
+            <div class="city-step-dot active" id="stepDot1">1</div>
+            <span class="city-step-span active" id="stepSpan1">Select State</span>
+          </div>
+          <div class="city-step-arrow">→</div>
+          <div class="city-step-item">
+            <div class="city-step-dot" id="stepDot2">2</div>
+            <span class="city-step-span" id="stepSpan2">Select City</span>
+          </div>
+          <div class="city-step-arrow">→</div>
+          <div class="city-step-item">
+            <div class="city-step-dot" id="stepDot3">3</div>
+            <span class="city-step-span" id="stepSpan3">Select Area</span>
+          </div>
+        </div>
+        <div class="city-select-row">
+          <div class="city-select-box">
+            <label class="city-select-label active" id="label1">State</label>
+            <select id="stateSelect" onchange="handleStateSelect(this)">
+              <option value="">🗺 Select State</option>
+              <option value="chhattisgarh">Chhattisgarh ✅</option>
+              <option value="mp">Madhya Pradesh</option>
+              <option value="maharashtra">Maharashtra</option>
+              <option value="delhi">Delhi NCR</option>
+              <option value="up">Uttar Pradesh</option>
+              <option value="rajasthan">Rajasthan</option>
+              <option value="gujarat">Gujarat</option>
+              <option value="karnataka">Karnataka</option>
+              <option value="tamilnadu">Tamil Nadu</option>
+              <option value="telangana">Telangana</option>
+              <option value="ap">Andhra Pradesh</option>
+              <option value="kerala">Kerala</option>
+              <option value="wb">West Bengal</option>
+              <option value="bihar">Bihar</option>
+              <option value="jharkhand">Jharkhand</option>
+              <option value="odisha">Odisha</option>
+              <option value="punjab">Punjab</option>
+              <option value="haryana">Haryana</option>
+              <option value="uttarakhand">Uttarakhand</option>
+              <option value="assam">Assam</option>
+              <option value="hp">Himachal Pradesh</option>
+              <option value="goa">Goa</option>
+              <option value="jk">Jammu & Kashmir</option>
+            </select>
+          </div>
+          <div class="city-select-box">
+            <label class="city-select-label" id="label2">City</label>
+            <select id="citySelect" onchange="handleCitySelect(this)" disabled>
+              <option value="">Select state first</option>
+            </select>
+          </div>
+          <div class="city-select-box">
+            <label class="city-select-label" id="label3">Area</label>
+            <select id="areaSelect" onchange="handleAreaSelect(this)" disabled>
+              <option value="">Select city first</option>
+            </select>
+          </div>
+        </div>
+        <span id="cityMsg" class="city-msg"></span>
+      </div>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary" onclick="openBooking(); return false;">Book Service</a>
+        <a href="#" class="btn btn-secondary" onclick="openPartnerChoice(); return false;">Become a Partner</a>
+      </div>
+    </div>
+
+    <div class="hero-image fade-in" aria-hidden="true">
+      <div class="hero-illustration">
+        <div class="hero-phone-mock">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <div class="hero-mock-tags">
+            <span class="mock-tag">⚡ Electrician — 28 min</span>
+            <span class="mock-tag">🔧 Plumber — 30 min</span>
+            <span class="mock-tag">❄️ AC Repair — 25 min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="container">
+    <div class="section-header">
+      <h2>Our Services</h2>
+      <p>Everything you need for your home, all in one place.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card fade-in" role="button" tabindex="0" aria-label="Electrician service">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="icon-box"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
+            <h3>Electrician</h3>
+            <p>Expert wiring, repairs, and installations.</p>
+          </div>
+          <div class="card-back">
+            <h3>Electrician</h3>
+            <p>Wiring, switches, fans, MCBs, short circuits &amp; full home electrical work.</p>
+            <button class="book-now-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-in" role="button" tabindex="0" aria-label="Plumber service">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="icon-box"><i class="fa-solid fa-faucet" aria-hidden="true"></i></div>
+            <h3>Plumber</h3>
+            <p>Leak fixes, pipe installation, and maintenance.</p>
+          </div>
+          <div class="card-back">
+            <h3>Plumber</h3>
+            <p>Tap leaks, drain blockage, pipe fitting, sanitary ware &amp; water tank cleaning.</p>
+            <button class="book-now-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-in" role="button" tabindex="0" aria-label="AC Repair service">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="icon-box"><i class="fa-solid fa-snowflake" aria-hidden="true"></i></div>
+            <h3>AC Repair</h3>
+            <p>Installation, cleaning, and repair services.</p>
+          </div>
+          <div class="card-back">
+            <h3>AC Repair</h3>
+            <p>AC installation, gas refill, deep cleaning, not cooling fix &amp; all brands serviced.</p>
+            <button class="book-now-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-in" role="button" tabindex="0" aria-label="Cleaning service">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="icon-box"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
+            <h3>Cleaning</h3>
+            <p>Deep cleaning for homes and offices.</p>
+          </div>
+          <div class="card-back">
+            <h3>Cleaning</h3>
+            <p>Full home deep clean, sofa shampooing, kitchen degreasing &amp; bathroom scrubbing.</p>
+            <button class="book-now-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-in" role="button" tabindex="0" aria-label="Home Painting service">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="icon-box"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
+            <h3>Home Painting</h3>
+            <p>Interior and exterior painting services.</p>
+          </div>
+          <div class="card-back">
+            <h3>Home Painting</h3>
+            <p>Interior &amp; exterior walls, texture paint, waterproofing &amp; colour consultation.</p>
+            <button class="book-now-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-in" role="button" tabindex="0" aria-label="Carpenter service">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="icon-box"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
+            <h3>Carpenter</h3>
+            <p>Furniture repair, wooden fittings, and custom carpentry work.</p>
+          </div>
+          <div class="card-back">
+            <h3>Carpenter</h3>
+            <p>Furniture repair, door/window fitting, custom woodwork &amp; kitchen cabinets.</p>
+            <button class="book-now-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-in" role="button" tabindex="0" aria-label="Maid service">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="icon-box"><i class="fa-solid fa-user" aria-hidden="true"></i></div>
+            <h3>Maid Service</h3>
+            <p>Professional house help for daily cleaning and home assistance.</p>
+          </div>
+          <div class="card-back">
+            <h3>Maid Service</h3>
+            <p>Daily or one-time maid, utensil cleaning, sweeping, mopping &amp; verified helpers.</p>
+            <button class="book-now-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-in" role="button" tabindex="0" aria-label="Home Appliance Repair service">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="icon-box"><i class="fa-solid fa-wrench" aria-hidden="true"></i></div>
+            <h3>Home Appliance Repair</h3>
+            <p>Repair services for washing machines, refrigerators, and more.</p>
+          </div>
+          <div class="card-back">
+            <h3>Appliance Repair</h3>
+            <p>Washing machine, fridge, microwave, geyser &amp; all major home appliances fixed.</p>
+            <button class="book-now-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="how-it-works">
+  <div class="hiw-inner">
+    <div class="hiw-top">
+      <div class="hiw-badge-wrap">
+        <div class="hiw-badge"><span class="hiw-dot"></span> App launching soon</div>
+      </div>
+      <h2>How Ajoomi Works</h2>
+      <p>From tap to doorstep in under 30 minutes — here's how.</p>
+    </div>
+
+    <div class="hiw-timeline">
+      <div class="hiw-line"><div class="hiw-line-fill" id="hiwFill"></div></div>
+
+      <div class="hiw-step">
+        <div class="hiw-bubble" id="bubble0">
+          <div class="hiw-num">1</div>
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </div>
+        <div class="hiw-card" id="card0">
+          <h3>Pick a service</h3>
+          <p>Browse 8+ categories — electrician, plumber, cleaning, AC repair and more.</p>
+          <div class="hiw-tag" id="tag0">In the app</div>
+        </div>
+      </div>
+
+      <div class="hiw-step">
+        <div class="hiw-bubble" id="bubble1">
+          <div class="hiw-num">2</div>
+          <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+        </div>
+        <div class="hiw-card" id="card1">
+          <h3>Book instantly</h3>
+          <p>Choose a time slot or get someone at your door in 30 minutes — you decide.</p>
+          <div class="hiw-tag" id="tag1">30 min response</div>
+        </div>
+      </div>
+
+      <div class="hiw-step">
+        <div class="hiw-bubble" id="bubble2">
+          <div class="hiw-num">3</div>
+          <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+        </div>
+        <div class="hiw-card" id="card2">
+          <h3>Pro arrives</h3>
+          <p>A verified, background-checked professional heads to your address. Track live.</p>
+          <div class="hiw-tag" id="tag2">Live tracking</div>
+        </div>
+      </div>
+
+      <div class="hiw-step">
+        <div class="hiw-bubble" id="bubble3">
+          <div class="hiw-num">4</div>
+          <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        </div>
+        <div class="hiw-card" id="card3">
+          <h3>Job done. Pay securely.</h3>
+          <p>Pay via UPI, card, or cash. Rate your pro and get a 7-day warranty.</p>
+          <div class="hiw-tag" id="tag3">7-day warranty</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hiw-stats-bar">
+      <div class="hiw-stat">
+        <div class="hiw-stat-n">30 min</div>
+        <div class="hiw-stat-l">Avg. response time</div>
+      </div>
+      <div class="hiw-stat-div"></div>
+      <div class="hiw-stat">
+        <div class="hiw-stat-n">100%</div>
+        <div class="hiw-stat-l">Background verified</div>
+      </div>
+      <div class="hiw-stat-div"></div>
+      <div class="hiw-stat">
+        <div class="hiw-stat-n">7 days</div>
+        <div class="hiw-stat-l">Rework warranty</div>
+      </div>
+      <div class="hiw-stat-div"></div>
+      <div class="hiw-stat">
+        <div class="hiw-stat-n">Fixed price</div>
+        <div class="hiw-stat-l">No hidden charges</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why-choose">
+  <div class="container">
+    <div class="section-header">
+      <h2>Why Choose Ajoomi</h2>
+      <p>Quality, speed and trust — built into every booking.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+        <h4>Verified Pros</h4>
+        <p>Background checked and skilled professionals.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <i class="fa-solid fa-tags" aria-hidden="true"></i>
+        <h4>Affordable</h4>
+        <p>Transparent pricing with no hidden charges.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+        <h4>Fast Service</h4>
+        <p>Bookings confirmed within minutes.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <i class="fa-solid fa-headset" aria-hidden="true"></i>
+        <h4>24/7 Support</h4>
+        <p>We are here to help you anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP DOWNLOAD -->
+<section class="app-download">
+  <div class="container app-container">
+    <div class="app-text fade-in">
+      <h2>Ajoomi in your pocket</h2>
+      <p>Download the app for the best experience. Track your service provider in real-time.</p>
+      <div class="app-buttons">
+        <a href="#" class="store-btn" onclick="openAppPopup(); return false;" aria-label="Get on Google Play">
+          <i class="fa-brands fa-google-play" aria-hidden="true"></i>
+          <div>
+            <small>GET IT ON</small>
+            <strong>Google Play</strong>
+          </div>
+        </a>
+        <a href="#" class="store-btn" onclick="openAppPopup(); return false;" aria-label="Download on the App Store">
+          <i class="fa-brands fa-apple" aria-hidden="true"></i>
+          <div>
+            <small>Download on the</small>
+            <strong>App Store</strong>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="app-image fade-in" aria-hidden="true">
+      <i class="fa-solid fa-mobile-screen-button"></i>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2>What Our Customers Say</h2>
+    </div>
+  </div>
+  <div class="marquee-wrapper" aria-label="Customer testimonials" role="region">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-card">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <p>"Ajoomi helped me find a reliable electrician within minutes. The service was fast and professional."</p>
+        <h5>— Rahul Verma</h5>
+      </div>
+      <div class="marquee-card">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <p>"Booked a home cleaning service and the team did an amazing job. My house looks brand new!"</p>
+        <h5>— Priya Sharma</h5>
+      </div>
+      <div class="marquee-card">
+        <div class="stars" aria-label="4 stars">★★★★☆</div>
+        <p>"Very convenient platform. I booked AC servicing and the technician arrived on time."</p>
+        <h5>— Arjun Patel</h5>
+      </div>
+      <div class="marquee-card">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <p>"Professional and polite staff. The painting work was completed faster than expected."</p>
+        <h5>— Neha Gupta</h5>
+      </div>
+      <div class="marquee-card">
+        <div class="stars" aria-label="4 stars">★★★★☆</div>
+        <p>"The plumber fixed my leakage issue quickly. Pricing was transparent and fair."</p>
+        <h5>— Sandeep Mishra</h5>
+      </div>
+      <div class="marquee-card">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <p>"Great experience! Booking a salon service at home was super easy through Ajoomi."</p>
+        <h5>— Kavita Singh</h5>
+      </div>
+      <!-- Duplicates for seamless loop -->
+      <div class="marquee-card" aria-hidden="true">
+        <div class="stars">★★★★★</div>
+        <p>"Ajoomi helped me find a reliable electrician within minutes. The service was fast and professional."</p>
+        <h5>— Rahul Verma</h5>
+      </div>
+      <div class="marquee-card" aria-hidden="true">
+        <div class="stars">★★★★★</div>
+        <p>"Booked a home cleaning service and the team did an amazing job. My house looks brand new!"</p>
+        <h5>— Priya Sharma</h5>
+      </div>
+      <div class="marquee-card" aria-hidden="true">
+        <div class="stars">★★★★☆</div>
+        <p>"Very convenient platform. I booked AC servicing and the technician arrived on time."</p>
+        <h5>— Arjun Patel</h5>
+      </div>
+      <div class="marquee-card" aria-hidden="true">
+        <div class="stars">★★★★★</div>
+        <p>"Professional and polite staff. The painting work was completed faster than expected."</p>
+        <h5>— Neha Gupta</h5>
+      </div>
+      <div class="marquee-card" aria-hidden="true">
+        <div class="stars">★★★★☆</div>
+        <p>"The plumber fixed my leakage issue quickly. Pricing was transparent and fair."</p>
+        <h5>— Sandeep Mishra</h5>
+      </div>
+      <div class="marquee-card" aria-hidden="true">
+        <div class="stars">★★★★★</div>
+        <p>"Great experience! Booking a salon service at home was super easy through Ajoomi."</p>
+        <h5>— Kavita Singh</h5>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section" id="statsSection" aria-label="Ajoomi statistics">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item fade-in">
+        <div class="stat-number">8+</div>
+        <div class="stat-label">Services Available</div>
+      </div>
+      <div class="stat-item fade-in">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Partners Onboarded</div>
+      </div>
+      <div class="stat-item fade-in">
+        <div class="stat-number">1</div>
+        <div class="stat-label">City — Raipur 🚀</div>
+      </div>
+      <div class="stat-item fade-in">
+        <div class="stat-number">⭐ 5</div>
+        <div class="stat-label">Customer Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know about Ajoomi.</p>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0">
+          How fast will a professional arrive?
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        <div class="faq-answer">Our Fast-Track booking connects you with a professional in as little as 30 minutes. For non-urgent tasks you can also schedule a convenient time slot.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0">
+          Are all professionals background verified?
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        <div class="faq-answer">Yes. Every professional on Ajoomi goes through a thorough background check, identity verification, and skill assessment before being onboarded.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0">
+          What payment methods are accepted?
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        <div class="faq-answer">We accept UPI, credit/debit cards, net banking, and cash on service. All online payments are processed through secure gateways.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0">
+          Is there a warranty on services?
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        <div class="faq-answer">Yes! All labor comes with a 7-day rework warranty. If you are not satisfied with the work, we will send the professional back at no extra charge.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0">
+          Which cities does Ajoomi currently serve?
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        <div class="faq-answer">We currently operate in Bilaspur, Raipur, Korba, Durg, Bhilai, Rajnandgaon and are expanding rapidly across Chhattisgarh.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0">
+          How do I become a service partner?
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </div>
+        <div class="faq-answer">Click "Become a Partner" on the homepage, fill in your details, and our team will contact you within 24 hours to get you started.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container footer-grid">
+
+    <div class="footer-col">
+      <a href="#home" class="logo">Ajoomi<span>.</span></a>
+      <p>Connecting you with trusted local services. Quality, speed, and reliability at your doorstep.</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/ajoomi_india?igsh=MThueTZ0N2x3dWJtaQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#" onclick="openAbout();   return false;">About Us</a></li>
+        <li><a href="#" onclick="openCareers(); return false;">Careers</a></li>
+        <li><a href="#" onclick="openBlog();    return false;">Blog</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#" onclick="openHelp();    return false;">Help Center</a></li>
+        <li><a href="#" onclick="openTerms();   return false;">Terms of Service</a></li>
+        <li><a href="#" onclick="openPrivacy(); return false;">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><i class="fa-solid fa-envelope" aria-hidden="true"></i> ajoomiindia@gmail.com</li>
+        <li>
+          <i class="fa-solid fa-phone" aria-hidden="true"></i>
+          <a href="https://wa.me/919179369730?text=Hello%20Ajoomi%20I%20want%20to%20book%20a%20service" target="_blank" rel="noopener noreferrer">
+            Chat on WhatsApp
+          </a>
+        </li>
+        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Raipur, 492001 (CG)</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Ajoomi. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- FLOATING ELEMENTS -->
+<button id="backToTop" aria-label="Back to top">
+  <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+</button>
+
+<a id="waFloat"
+   href="https://wa.me/919179369730?text=Hello%20Ajoomi%20I%20want%20to%20book%20a%20service"
+   target="_blank" rel="noopener noreferrer"
+   aria-label="Chat on WhatsApp">
+  <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+</a>
+
+<!-- ==============================
+     POPUPS
+     ============================== -->
+
+<!-- Blog -->
+<div id="blogPopup" class="popup" role="dialog" aria-modal="true" aria-labelledby="blogTitle">
+  <div class="popup-content">
+    <button class="close" onclick="closePopup('blogPopup')" aria-label="Close">&times;</button>
+    <h2 id="blogTitle">Ajoomi Blog ✍️</h2>
+    <div class="blog-card"><h4>5 Home Maintenance Tips</h4><p>Simple tips to keep your home safe and avoid expensive repairs.</p></div>
+    <div class="blog-card"><h4>How to Choose a Reliable Electrician</h4><p>Important things to check before hiring an electrician.</p></div>
+    <div class="blog-card"><h4>Why Professional Cleaning Matters</h4><p>Discover why professional cleaning improves health and comfort.</p></div>
+  </div>
+</div>
+
+<!-- Careers -->
+<div id="careersPopup" class="popup" role="dialog" aria-modal="true" aria-labelledby="careersTitle">
+  <div class="popup-content">
+    <button class="close" onclick="closePopup('careersPopup')" aria-label="Close">&times;</button>
+    <h2 id="careersTitle">Careers at Ajoomi 🚀</h2>
+    <p>Join our mission to make home services simple and accessible across India.</p>
+    <div class="job-card"><h4>Frontend Developer</h4><p>Build beautiful and fast user interfaces for our platform.</p></div>
+    <div class="job-card"><h4>Flutter App Developer</h4><p>Help us build our mobile app and improve customer experience.</p></div>
+    <div class="job-card"><h4>Marketing Executive</h4><p>Grow Ajoomi by reaching more customers and service professionals.</p></div>
+    <p class="career-mail">Send your resume to <strong>careers@ajoomi.com</strong></p>
+  </div>
+</div>
+
+<!-- Privacy -->
+<div id="privacyPopup" class="popup" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+  <div class="popup-content">
+    <button class="close" onclick="closePopup('privacyPopup')" aria-label="Close">&times;</button>
+    <h2 id="privacyTitle">Privacy Policy</h2>
+    <p>At Ajoomi, we respect your privacy and are committed to protecting your personal information.</p>
+    <h4>1. Information We Collect</h4>
+    <p>We may collect your name, phone number, email address, and location when you use our services.</p>
+    <h4>2. How We Use Your Information</h4>
+    <p>Your information is used to connect you with service professionals and improve our platform.</p>
+    <h4>3. Data Protection</h4>
+    <p>We use secure systems to protect your personal information and prevent unauthorized access.</p>
+    <h4>4. Third-Party Services</h4>
+    <p>We may share limited information with trusted service providers only to complete your booking.</p>
+    <h4>5. Contact</h4>
+    <p>Questions? Email us at ajoomisupport@gmail.com.</p>
+  </div>
+</div>
+
+<!-- Terms -->
+<div id="termsPopup" class="popup" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+  <div class="popup-content">
+    <button class="close" onclick="closePopup('termsPopup')" aria-label="Close">&times;</button>
+    <h2 id="termsTitle">Terms &amp; Conditions</h2>
+    <p>These terms govern the use of services made available on or through the Ajoomi platform.</p>
+    <h4>1. Our Services</h4>
+    <p>We provide electrical, plumbing, cleaning, painting, maid, and appliance repair services through verified professionals.</p>
+    <h4>2. User Eligibility</h4>
+    <p>You must be at least 18 years of age to access and use Ajoomi services.</p>
+    <h4>3. Fixed Pricing Policy</h4>
+    <p>We operate on a Fixed Price Model. The price shown at booking is the final labor cost.</p>
+    <h4>4. Payment Terms</h4>
+    <p>Payments via UPI, Cards, Net Banking, or verified Cash-on-Service.</p>
+    <h4>5. Grievance Redressal</h4>
+    <p>Email ajoomisupport@gmail.com. Complaints acknowledged within 48 hours.</p>
+  </div>
+</div>
+
+<!-- Help -->
+<div id="helpPopup" class="popup" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+  <div class="popup-content">
+    <button class="close" onclick="closePopup('helpPopup')" aria-label="Close">&times;</button>
+    <h2 id="helpTitle">Help Center</h2>
+    <p>We are here to help you 24/7. Choose how to reach us:</p>
+    <ul>
+      <li><strong>Live Chat (In-App):</strong> Tap "Chat with Us" inside the app for real-time support.</li>
+      <li><strong>WhatsApp:</strong> Save <strong>+91 9179369730</strong> and send "Hi".</li>
+      <li><strong>Email:</strong> <strong>ajoomisupport@gmail.com</strong> — we respond within 2–4 hours.</li>
+    </ul>
+    <br>
+    <a href="https://wa.me/919179369730?text=Hello%20Ajoomi%20I%20need%20help%20with%20a%20service"
+       target="_blank" rel="noopener noreferrer" class="btn btn-primary">Chat on WhatsApp</a>
+  </div>
+</div>
+
+<!-- About -->
+<div id="aboutPopup" class="popup" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+  <div class="popup-content">
+    <button class="close" onclick="closePopup('aboutPopup')" aria-label="Close">&times;</button>
+    <h2 id="aboutTitle">About Ajoomi</h2>
+    <p>Ajoomi is a premier home services marketplace designed to bring professional, reliable, and instant solutions directly to your doorstep.</p>
+    <p>We redefine the service experience through rigorous background checks, transparent fixed pricing, a 30-day service guarantee, and smart technology.</p>
+    <p>We empower local workers by giving them more job opportunities while helping customers find quality services instantly.</p>
+  </div>
+</div>
+
+<!-- Login / Partner -->
+<div id="loginPopup" class="popup" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="popup-content">
+    <button class="close" onclick="closePopup('loginPopup')" aria-label="Close">&times;</button>
+    <h2 id="loginTitle">Partner Login</h2>
+    <p>Join Ajoomi as a service partner and start earning today.</p>
+    <div class="login-form">
+      <input type="text"  id="partnerName"    placeholder="Full Name" required autocomplete="name">
+      <input type="tel"   id="partnerPhone"   placeholder="Phone Number" required autocomplete="tel">
+      <input type="text"  id="partnerService" placeholder="Service Type (e.g. Electrician, Plumber)">
+      <button class="btn btn-primary" onclick="submitPartner()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<!-- App Coming Soon -->
+<div id="appPopup" class="app-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="appTitle">
+  <div class="app-popup-box">
+    <button class="close-popup" onclick="closePopup('appPopup')" aria-label="Close">&times;</button>
+    <span class="rocket" aria-hidden="true">🚀</span>
+    <h2 id="appTitle">Coming Soon!</h2>
+    <p>We are building an amazing mobile experience.<br>Get notified when our app launches.</p>
+    <div class="store-coming-soon">
+      <div class="store-btn-cs disabled" aria-label="Google Play — coming soon">
+        <i class="fa-brands fa-google-play" aria-hidden="true"></i>
+        <div><small>Coming Soon on</small><strong>Google Play</strong></div>
+      </div>
+      <div class="store-btn-cs disabled" aria-label="App Store — coming soon">
+        <i class="fa-brands fa-apple" aria-hidden="true"></i>
+        <div><small>Coming Soon on</small><strong>App Store</strong></div>
+      </div>
+    </div>
+    <p style="font-size:0.83rem; opacity:0.7; margin:4px 0 10px;">Get notified when we launch 👇</p>
+    <div class="notify-box">
+      <input type="email" id="notifyEmail" placeholder="Enter your email" autocomplete="email">
+      <button onclick="submitNotify(event)">Notify Me</button>
+    </div>
+    <button class="btn cancel-btn" onclick="closePopup('appPopup')">Maybe Later</button>
+    <p class="launch-text">🎯 Launching Soon on Android &amp; iOS</p>
+  </div>
+</div>
+
+<!-- Partner Choice -->
+<div id="partnerChoicePopup" class="app-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="partnerChoiceTitle">
+  <div class="app-popup-box partner-choice-box">
+    <button class="close-popup" onclick="closePopup('partnerChoicePopup')" aria-label="Close">&times;</button>
+    <span class="rocket" aria-hidden="true">🤝</span>
+    <h2 id="partnerChoiceTitle">Join Ajoomi</h2>
+    <p>What would you like to do?</p>
+    <div class="partner-choice-options">
+      <div class="partner-option-card"
+           onclick="closePopup('partnerChoicePopup'); openAppPopup();"
+           role="button" tabindex="0"
+           onkeypress="if(event.key==='Enter'){closePopup('partnerChoicePopup'); openAppPopup();}">
+        <div class="option-icon" aria-hidden="true">📱</div>
+        <h4>Download the App</h4>
+        <p>Get the Ajoomi app — available soon on Play Store &amp; App Store.</p>
+        <div class="store-mini">
+          <span><i class="fa-brands fa-google-play" aria-hidden="true"></i> Play Store</span>
+          <span><i class="fa-brands fa-apple" aria-hidden="true"></i> App Store</span>
+        </div>
+      </div>
+      <div class="partner-option-card"
+           onclick="closePopup('partnerChoicePopup'); openLogin();"
+           role="button" tabindex="0"
+           onkeypress="if(event.key==='Enter'){closePopup('partnerChoicePopup'); openLogin();}">
+        <div class="option-icon" aria-hidden="true">🔧</div>
+        <h4>Become a Partner</h4>
+        <p>Are you a skilled professional? Join our network and start earning today.</p>
+        <span class="join-tag">Register as Pro →</span>
+      </div>
+    </div>
+    <button class="btn cancel-btn" onclick="closePopup('partnerChoicePopup')">Cancel</button>
+  </div>
+</div>
+
+<!-- Add this before </body> in index.html, after partnerChoicePopup div -->
+<div id="cityNotifyPopup" class="app-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="cityNotifyTitle">
+  <div class="app-popup-box" style="max-width:420px;">
+    <button class="close-popup" onclick="closePopup('cityNotifyPopup')" aria-label="Close">&times;</button>
+    <span class="rocket" aria-hidden="true">🚀</span>
+    <h2 id="cityNotifyTitle">Coming to <span id="cityNotifyName">your city</span> soon!</h2>
+    <p id="cityNotifyMsg" style="font-size:0.9rem;color:#666;margin:6px 0 14px;">
+      We're expanding fast! Enter your email and we'll notify you the moment we go live in your area.
+    </p>
+    <div id="cityNotifyBadge" style="display:inline-flex;align-items:center;gap:6px;background:#fff3e0;color:#b45309;font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;margin-bottom:16px;">
+      📍 <span id="cityNotifyLocation">—</span>
+    </div>
+    <div class="notify-box" style="margin-top:0;">
+      <input type="email" id="cityNotifyEmail" placeholder="Enter your email" autocomplete="email" required>
+      <button id="cityNotifyBtn" onclick="submitCityNotify(event)">Notify Me</button>
+    </div>
+    <p style="font-size:0.75rem;color:#aaa;margin:10px 0 4px;">No spam. Only a launch announcement.</p>
+    <button class="btn cancel-btn" onclick="closePopup('cityNotifyPopup')" style="margin-top:10px;">Maybe Later</button>
+  </div>
+</div>
+
+<!-- FIX 7: bookingPopup REMOVED — it was dead HTML (openBooking() never opened it) -->
+
+<!-- SCRIPTS -->
+<script src="script.js"></script>
+<script type="module" src="firebase.js"></script>
+<!-- FIX: sync mobile theme toggle icon with desktop toggle -->
+<script>
+  (function() {
+    var mobile = document.getElementById("themeToggleMobile");
+    if (!mobile) return;
+    mobile.addEventListener("click", function() {
+      var isDark = !document.body.classList.contains("dark-mode");
+      // reuse the same applyTheme + localStorage logic already in script.js
+      if (typeof applyTheme === "function") {
+        applyTheme(isDark);
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      }
+      // sync icon
+      var icon = mobile.querySelector("i");
+      if (icon) icon.className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+      var label = mobile.querySelector(".theme-label");
+      if (label) label.textContent = isDark ? "Light Mode" : "Dark Mode";
+      // also sync desktop icon
+      var desktopIcon = document.querySelector("#themeToggle i");
+      if (desktopIcon) desktopIcon.className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    });
+    // init label based on saved theme
+    var saved = localStorage.getItem("theme");
+    var isDark = saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var icon = mobile.querySelector("i");
+    var label = mobile.querySelector(".theme-label");
+    if (icon) icon.className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    if (label) label.textContent = isDark ? "Light Mode" : "Dark Mode";
+  })();
+</script>
+
+</body>
+</html>
